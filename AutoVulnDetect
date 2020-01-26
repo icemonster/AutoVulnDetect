@@ -1,0 +1,78 @@
+#!/usr/bin/env python3
+
+import logging
+import argparse
+import sys
+
+from srcAVD.avdMain import *
+from srcAVD import config
+from pwn import ELF
+from time import time
+
+parser = argparse.ArgumentParser(description='Automatic Patch Generation')
+parser.add_argument('targetBinary', metavar='b', type=str, help='The name of the binary to analyse')
+parser.add_argument('--GDB_IP', metavar='ip', type=str, default=config.GDB_IP, help='The IP Address where GDB server should run (e.g 127.0.0.1)')
+parser.add_argument('--GDB_PORT', metavar='port', type=int, default=config.GDB_PORT, help='The port where GDB server should run (e.g 31337)')
+parser.add_argument('--RET_ADDR', metavar='retAddr', type=str, default='0x41414141', help='Overwrite return address with the specified address')
+parser.add_argument('-e', action='store_true', help='Dont generate exploits when possible')
+parser.add_argument('-s', action='store_false', help='Dont check safety policies')
+parser.add_argument('-c', action='store_true', help='Do a concrete execution')
+parser.add_argument('-v', action='store_true', help='Be very verbose')
+parser.add_argument('-nv', action='store_true', help='Dont be very verbose')
+parser.add_argument('-no-show-trace', action='store_true', help='Dont see exec. trace while executing')
+parser.add_argument('--allRam', action='store_true', help='Dont limit RAM usage')
+parser.add_argument('--args', nargs='*', default='', help='Arguments to be passed to the binary. Can be Symbolic by indicating: Sym<size>  eg: --args Sym4 indicates a 4 BYTE symbolic argument')
+args = parser.parse_args()
+
+def parseArgs(args):
+	''' Parse vulnerable program args '''
+	res = []
+	for i in range(len(args)):
+		arg = args[i]
+		if arg.startswith('Sym'):
+			size = int(arg[3:])
+			res.append(size)
+		else:
+			res.append(arg)
+	return res
+
+if not args.allRam:
+	memory_limit() #Limit RAM usage. Important when we have a state explosion problem
+
+config.ARGC = len(args.args)+1
+config.ARGV = parseArgs(args.args)
+name = args.targetBinary
+config.GDB_IP = args.GDB_IP
+config.GDB_PORT = args.GDB_PORT
+config.EXEC_SAFETY_POLICIES = args.s
+config.EXEC_EXPLOITS = args.e
+config.SYM_EXEC = not args.c
+config.LOGGING = args.v
+config.RETADDROF = int(args.RET_ADDR, 16)
+config.BINARY_NAME = name
+config.EXEC_SAFETY_POLICIES = not args.e
+
+elf = ELF(name) #pwntools ELF to find arch
+if elf.arch == 'i386':
+	config.ARCH = config.x86
+elif elf.arch == 'amd64':
+	config.ARCH = config.x64
+else:
+	print('Unsupported architecture:', elf.arg)
+	sys.exit(1)
+
+logger = logging.getLogger()
+if config.LOGGING:
+	logger.setLevel(logging.DEBUG)
+else:
+	logger.setLevel(logging.ERROR)
+
+config.STARTED_TIME = time()
+
+apg = APG(name, debug=not args.nv)
+#apg.setBreakpoint(0x55555555469c)
+apg.run()
+
+terminate()
+
+#echo 0 | sudo tee /proc/sys/kernel/randomize_va_space (disable ASLR)
