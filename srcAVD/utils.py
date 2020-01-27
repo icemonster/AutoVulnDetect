@@ -478,19 +478,23 @@ def print(*args, **kargs):
 		already_written = 0
 	backupPrint(*args, **kargs)
 
-def logOnProfile(log):
-	with open('{}.profile'.format(config.REAL_BINARY_NAME), 'a+') as f:
-		f.write(time.ctime())
-		f.write(': ')
-		f.write(log)
-		f.write('\n')
-
 def terminate():
 	end = time.time()
 	diff = end - config.STARTED_TIME
-	logOnProfile("Analysis done in a total of {} seconds".format(diff))
+
+EXPLOIT_TEMPLATE = '''from pwn import *
+
+p = process(["{}", {}])
+p.send(b"{}")
+p.interactive()
+
+'''
 
 def saveExploit(exploit):
 	if config.SAVE_EXPLOITS:
-		with open('APG_input','wb') as f:
-			f.write(bytes([ord(i) for i in exploit])) #Not the same thing as exploit.encode()!
+		argv = '"' + '","'.join(map(lambda x: x.replace('\x00',''), config.exploiting_args)) + '"'
+		#inp = ''.join(map(lambda x: '\\x'+hex(x)[2:], [ord(i) for i in exploit]))
+
+		with open('exploit.py','w') as f:
+			finalStr = EXPLOIT_TEMPLATE.format(config.BINARY_NAME, argv, exploit)
+			f.write(finalStr)

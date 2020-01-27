@@ -51,6 +51,7 @@ config.LOGGING = args.v
 config.RETADDROF = int(args.RET_ADDR, 16)
 config.BINARY_NAME = name
 config.EXEC_SAFETY_POLICIES = not args.e
+config.SAVE_EXPLOITS = args.e
 
 elf = ELF(name) #pwntools ELF to find arch
 if elf.arch == 'i386':

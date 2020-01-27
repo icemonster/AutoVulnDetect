@@ -261,7 +261,6 @@ class Memory:
 		introduceTaintLeak = False
 
 		if isSymbolic(addr): #This may be a vulnerability right away but lets continue
-			#If we load from the secret flag page... (CGC stuff)
 			addReasonableRestrToSym(self, addr) #Make the value belong to one of the available memory ranges
 			addr2 = getPossibleValue(self, addr)
 			self.addRestr(addr == addr2)

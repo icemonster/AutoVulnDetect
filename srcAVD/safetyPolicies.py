@@ -191,6 +191,7 @@ def foundExploit(exploitStr, mem=None):
 	if mem is not None:
 		string = concrete_input(mem, minimized=False)
 		print('Exploiting input:', string)
+		saveExploit(string)
 
 def foundVuln(vunlnStr, mem=None):
 	if not config.VULN_FOUND:
