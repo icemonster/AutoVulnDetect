@@ -203,8 +203,6 @@ def foundVuln(vunlnStr, mem=None):
 			print('[!] Current IP: {}'.format(hex(mem.getIP())))
 			mem.printBT()
 
-		logOnProfile(vunlnStr)
-
 #Keys are types (like <bap.Jmp> or <Summary>)
 #Values are list of safety policies
 #Safety policies are functions that take the executor, the current code and the memory as input 
