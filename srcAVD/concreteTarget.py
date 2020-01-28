@@ -92,9 +92,7 @@ class AvatarGDBConcreteTarget():
             print('Something went wrong while trying to go to main. Main addr={}'.format(hex(entry)))
             terminate()
             exit()
-        else:
-            print('All good')
-
+            
         self.target.remove_breakpoint(entry)
 
 
