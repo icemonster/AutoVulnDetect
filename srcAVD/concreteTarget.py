@@ -9,6 +9,7 @@ from srcAVD.bilExec import BilExec
 from srcAVD.program import Program
 from srcAVD.utils import isSymbolic
 from srcAVD.adt import *
+import psutil
 
 def getArgs():
     args = []
@@ -95,6 +96,7 @@ class AvatarGDBConcreteTarget():
             
         self.target.remove_breakpoint(entry)
 
+        self.memmap = self.get_mappings() #Libc mappings and other libraries only load after program startup of course
 
         #Synchronize cle loader with gdbserver. FIXME: Isn't there an option to do that already?  
         main_opts = {'base_addr': self.memmap[0].start_address}
@@ -129,10 +131,9 @@ class AvatarGDBConcreteTarget():
 
         self.mem.initMem() #Update register values
 
+        self.dumpMemoryContents()
+        
         fixArgs(self.mem) #Update symbolic arguments if any
-
-        if config.O1_ENABLED:
-            self.dumpMemoryContents()
 
         self.canBeUndefined = False
 
@@ -171,20 +172,28 @@ class AvatarGDBConcreteTarget():
         mem = self.mem
 
         for m in self.memmap:
-            size = m.end_address - m.start_address
-  
-            print('Copying {} bytes from section {}'.format(size, m.name))
-                      
-            try:
-                contents = self.read_memory(m.start_address, size, raw=True)
-            except:
-                print('Error copying data. Its probably not important anyway')
+            if m.name == '[vvar]': #This is kernel stuff
+                continue
+            if m.permissions[2]: #We dont want to cache executable stuff
                 continue
 
-            addr = m.start_address
+            size = m.end_address - m.start_address
+  
+            if config.LOGGING:
+                print('[Optimizing] Copying {} bytes from section {} [{}-{}]'.format(size, m.name, hex(m.start_address), hex(m.end_address)))
+            
+            if m.name == '[stack]':
+                READ_THIS_MANY = 0x10000 #I dont suppose someone will use more than 0x10000 bytes with env variables and program arguments :)
+                addr = m.end_address - READ_THIS_MANY
+                contents = self.read_memory(addr, READ_THIS_MANY, raw=True)
+            else:
+                contents = self.read_memory(m.start_address, size, raw=True)
+                addr = m.start_address
+
             for b in contents: #For each byte...
-                mem.m[addr] = ADT(b)
-                addr += 1
+                if b != b'\x00' or 1 == 1:
+                    mem.m[addr] = ADT(b)
+                    addr += 1
 
     def executeConcretelyUntilNeeded(self):
         self.mem.concreteMemory = True
@@ -247,10 +256,7 @@ class AvatarGDBConcreteTarget():
         self.gdbserver.terminate()
 
     def read_instructions(self, addr, size):
-        if config.O1_ENABLED:
-            return bytes([self.gm.getFromBaseMem(addr + i) for i in range(size)])
-        else:
-            return self.read_memory(addr, size)
+        return self.read_memory(addr, size)
 
     def read_memory(self, address, nbytes, **kwargs):
         """
@@ -262,6 +268,9 @@ class AvatarGDBConcreteTarget():
             :rtype: str
             :raise angr.errors.SimMemoryError
         """
+
+        #if not self.canBeUndefined:
+        #    return b'\x00'
 
         assert not isSymbolic(address)
 
@@ -394,6 +403,7 @@ class AvatarGDBConcreteTarget():
                 self.end_address = end_address
                 self.offset = offset
                 self.name = name
+                self.permissions = (False, False, False) #(Read, Write, Execute)
 
             def __str__(self):
                 my_str = "MemoryMap[start_address: 0x%x | end_address: 0x%x | name: %s" \
@@ -407,12 +417,25 @@ class AvatarGDBConcreteTarget():
                 return addr >= self.start_address and addr < self.end_address
 
         mapping_output = self.target.protocols.memory.get_mappings()
-
         mapping_output = mapping_output[1].split("\n")[4:]
+
+        dict_pids = {
+            p.info["name"]: p.info["pid"]
+            for p in psutil.process_iter(attrs=["pid", "name"])
+        }
+
+        assert config.REAL_BINARY_NAME in dict_pids
+        pid = dict_pids[config.REAL_BINARY_NAME]
+
+        with open('/proc/{}/maps'.format(pid),'r') as f:
+            data = f.read()
+        data = data.split('\n')[:-1]
 
         vmmap = []
 
+        ind = 0
         for mapp in mapping_output:
+
             mapp = mapp[2:].lstrip(' ')
             mapp = mapp.split(" ")
 
@@ -435,6 +458,9 @@ class AvatarGDBConcreteTarget():
             else:
                 map_name = 'unknown'
             vmmap.append(MemoryMap(map_start_address, map_end_address, offset, map_name))
+            prots = data[ind].split(' ')[1]
+            vmmap[-1].permissions = ('r' in prots, 'w' in prots, 'x' in prots)
+            ind += 1
 
         return vmmap
 

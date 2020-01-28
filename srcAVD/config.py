@@ -35,8 +35,6 @@ RETADDROF = 0x41414141
 #Logging enabled
 LOGGING = False
 
-O1_ENABLED = False
-
 #Useful globals
 BINARY_NAME = '' #FULL PATH
 REAL_BINARY_NAME = '' #Only binary name
