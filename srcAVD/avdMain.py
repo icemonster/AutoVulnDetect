@@ -217,6 +217,7 @@ class APG:
 			if 'not part of a loaded object' in descr:
 				if not config.STRIPPED_BINARY:
 					print('[{}]SEGFAULT - This may be caused by the execution of dynamic code'.format(mem.memId))
+				mem.hlt = True
 				continue
 
 			#Check if we reach the end of analysis
@@ -228,6 +229,9 @@ class APG:
 				continue
 
 			code = self.program.getBlk(ip)
+			if code is None:
+				mem.hlt = True
+
 			if self.step:
 				interact(banner="Step", local=locals(), exitmsg="")
 			

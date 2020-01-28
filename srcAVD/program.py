@@ -69,7 +69,8 @@ class Program:
 			return func[1]
 
 		self.getCode(ip)
-		assert ip in self.bilFuncs
+		if ip not in self.bilFuncs:
+			return None
 		return self.bilFuncs.get(ip)[1]
 
 	def parseCode(self, addr, code):
