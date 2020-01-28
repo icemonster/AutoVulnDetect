@@ -54,11 +54,11 @@ class BilExec(bap.bil.Visitor):
 			res.val = simplify(res.val) #Simplify after computing expression...
 
 		if config.LOGGING: #If logging is enabled...
-			if type(res.val) == int:
+			if res is not None and type(res.val) == int:
 				toDebug = str(exp) + ' --> ' + hex(res.val)
 				logging.debug(toDebug)
 
-			else:
+			elif res is not None:
 				toDebug = str(exp) + ' --> ' + str(res.val) #This takes a lot of time for large symbols
 				logging.debug(toDebug)
 				
