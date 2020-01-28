@@ -52,13 +52,16 @@ class Program:
 		#result: '__libc_start_main+0x0 in libc.so.6 (0x18d90)'
 		func = self.concrete.ld.describe_addr(ip).split(' ')[0] 
 		assert '+' in func
-		func,_ = func.split('+')
-		if func.startswith('PLT.'):
-			func = func[4:]
+		func,offset = func.split('+')
+
+		func2 = func
+		if func2.startswith('PLT.'):
+			func2 = func2[4:]
 
 		#Check in the summaries first
-		if func in summaries: #If there is a summary for the function...
-			return summaries[func]
+		if func2 in summaries and (not config.STRIPPED_BINARY or func.startswith('PLT.') and offset == '0x0'): #If there is a summary for the function...
+			#If binary is stripped, its gg 
+			return summaries[func2]
 
 		#Then, check in the loaded functions
 		func = self.bilFuncs.get(ip, None)

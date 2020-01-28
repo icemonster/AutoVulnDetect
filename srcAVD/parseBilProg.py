@@ -107,7 +107,7 @@ def parseProj(name):
 
 	#If we hadn't analyzed that binary before or the binary has changed...
 	if not os.path.isfile(fileName) or isMoreRecent(name, fileName):
-		toPerserve, proj = bap.run(name, args=["-dbil.adt"], parser=bil_adt_project_parser)
+		toPerserve, proj = bap.run(name, args=["-dbil.adt", "--loader=raw","--raw-base={}".format(hex(config.BASE_ADDR))], parser=bil_adt_project_parser)
 	else:
 		print('Loading {} ({} was already parsed)'.format(fileName, name))
 		with open(fileName,'rb') as f:

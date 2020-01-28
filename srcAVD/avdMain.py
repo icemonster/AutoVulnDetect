@@ -29,14 +29,14 @@ class APG:
 		self.Q = []
 		self.Qsize = 0
 
-		toPerserve, program = parseProj(name)
-
 		progName = os.path.relpath(name).split('/')[-1]
 		config.REAL_BINARY_NAME = progName
 
 		print('Analysing {} ({})'.format(progName, config.ARCH.name))
 
 		self.concrete = AvatarGDBConcreteTarget(config.GDB_IP, config.GDB_PORT, name)
+		toPerserve, program = parseProj(name)
+
 		self.program = Program(program, self.concrete)
 		self.breakpoints = []
 		self.step = False
@@ -53,12 +53,6 @@ class APG:
 		
 	def printDescription(self, mem, ip, descr):
 		offset = DESCR_RE.findall(descr)
-
-		try:
-			if descr.split('+')[1][0:3] == '0x0' and self.debug:
-				print(config.ARCH.ipReg,':',hex(ip),'-',descr) #FIXME TODO DEBUG. REMOVE ME
-		except:
-			pass
 			
 		if offset != []:
 			offset = offset[0]
@@ -67,14 +61,17 @@ class APG:
 			func = descr.split('+')[0]
 			func = func[4:]
 
-			if func not in summaries:
+			if func not in summaries and not config.STRIPPED_BINARY:
 				print(config.ARCH.ipReg,':',hex(ip),'-',descr)
 				#FIXME 
 				print('You should implement the above summary')
 				mem.hlt = True #FIXME
 				#terminate()
 		if self.debug or self.step:
-			print('[{}]{}: '.format(mem.memId, config.ARCH.ipReg),hex(ip),'-',descr, file=sys.stdout)
+			if not config.STRIPPED_BINARY:
+				print('[{}]{}: '.format(mem.memId, config.ARCH.ipReg),hex(ip),'-',descr, file=sys.stdout)
+			else:
+				print('[{}]{}: '.format(mem.memId, config.ARCH.ipReg),hex(ip), file=sys.stdout)
 
 	def setBreakpoint(self, addr):
 		if addr not in self.breakpoints:
@@ -186,7 +183,11 @@ class APG:
 		self.addMemToQueue(mem)
 
 		main = self.program.concrete.ld.find_symbol('main')
-		finishLine = main.rebased_addr + main.size - 1
+
+		if main is not None:
+			finishLine = main.rebased_addr + main.size - 1
+		else:
+			finishLine = None
 
 		diverge = 0
 		config.VULN_FOUND = False
@@ -214,7 +215,8 @@ class APG:
 
 			#FIXME - This should just check if its executable or not
 			if 'not part of a loaded object' in descr:
-				print('[{}]SEGFAULT - This may be caused by the execution of dynamic code'.format(mem.memId))
+				if not config.STRIPPED_BINARY:
+					print('[{}]SEGFAULT - This may be caused by the execution of dynamic code'.format(mem.memId))
 				continue
 
 			#Check if we reach the end of analysis
@@ -226,7 +228,6 @@ class APG:
 				continue
 
 			code = self.program.getBlk(ip)
-
 			if self.step:
 				interact(banner="Step", local=locals(), exitmsg="")
 			
