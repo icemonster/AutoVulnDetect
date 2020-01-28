@@ -3,6 +3,7 @@ from z3 import *
 from srcAVD import config
 import time
 import resource, os
+from pwn import *
 
 def memory_limit():
 	''' Limit RAM usage ''' 
@@ -18,6 +19,22 @@ def get_memory():
 				free_memory += int(sline[1])
 	return free_memory
 
+
+def find_main():
+	BYTES_TO_CHECK = 1024
+	e = ELF(config.BINARY_NAME)
+
+	lines = e.disasm(e.entry, BYTES_TO_CHECK).split("\n")
+	hlt_inst = next(x for x in lines if "hlt" in x)
+	assert hlt_inst != None, "Failed to find hlt intruction while trying to find main"
+
+	hlt_inst_index = lines.index(hlt_inst)
+
+	main_inst = lines[hlt_inst_index-2]
+	
+	main_text = main_inst[main_inst.rfind('x')-1:]
+	main_addr = int(main_text, 16)
+	return main_addr
 
 class Pointer:
 	pass

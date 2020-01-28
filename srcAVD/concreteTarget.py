@@ -62,18 +62,41 @@ class AvatarGDBConcreteTarget():
         self.gdbserver = subprocess.Popen('gdbserver --once {}:{} {} {}'.format(gdbserver_ip, gdbserver_port, binary, args), shell=True, env=cb_env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
         self.target.init()
-        
+        self.memmap = self.get_mappings()
+
+        config.BASE_ADDR = self.memmap[0].start_address
+
         entry = self.target.protocols.memory.get_symbol('main')
-        assert entry[0]
-        entry = entry[1]
+        if not entry[0]:
+            config.STRIPPED_BINARY = True
+            if config.ARCH == config.x86:
+                print('Can not handle 32-bit stripped binaries yet.')
+                exit()
+            else:
+                #Find main another way
+                if config.IS_PIE:
+                    entry = config.BASE_ADDR + find_main()
+                else:
+                    entry = find_main()
+                    
+                print('Binary is stripped. base = {}, main = {}'.format(hex(config.BASE_ADDR), hex(entry)))
+        else:
+            entry = entry[1]
 
         self.target.set_breakpoint(entry)
         self.target.cont()
 
-        self.target.wait(TargetStates.STOPPED)
+        self.target.wait(TargetStates.STOPPED | TargetStates.EXITED)
+
+        if self.target.state == TargetStates.EXITED:
+            print('Something went wrong while trying to go to main. Main addr={}'.format(hex(entry)))
+            terminate()
+            exit()
+        else:
+            print('All good')
+
         self.target.remove_breakpoint(entry)
 
-        self.memmap = self.get_mappings()
 
         #Synchronize cle loader with gdbserver. FIXME: Isn't there an option to do that already?  
         main_opts = {'base_addr': self.memmap[0].start_address}
@@ -198,6 +221,7 @@ class AvatarGDBConcreteTarget():
             if self.target.state == TargetStates.EXITED:
                 print('No symbolic input is requested')
                 terminate()
+                exit()
 
             address = self.target.read_register(config.ARCH.ipReg.lower())
             
@@ -249,6 +273,7 @@ class AvatarGDBConcreteTarget():
             if e.args[0] == 'read_memory() requested but memory is undefined.':
                 print('GDB Target is down...')
                 terminate()
+                exit()
 
             elif e.args[0] == 'Failed to read memory!':
                 if self.canBeUndefined:

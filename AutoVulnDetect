@@ -62,6 +62,8 @@ else:
 	print('Unsupported architecture:', elf.arg)
 	sys.exit(1)
 
+config.IS_PIE = elf.pie
+
 logger = logging.getLogger()
 if config.LOGGING:
 	logger.setLevel(logging.DEBUG)

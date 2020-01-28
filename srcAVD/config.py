@@ -44,6 +44,10 @@ STARTED_TIME = 0 #Time where analysis started
 TERMINATED = True
 VULN_FOUND = False #Whether a vulnerability was found during the analysis
 
+STRIPPED_BINARY = False
+BASE_ADDR = None
+IS_PIE = False
+
 #Args
 ARGC = 1
 ARGV = [] #Excluding name of binary
