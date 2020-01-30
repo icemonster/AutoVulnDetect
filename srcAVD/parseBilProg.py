@@ -110,7 +110,7 @@ def parseProj(name):
 		if config.ARCH == config.x86:
 			toPerserve, proj = bap.run(name, args=["-dbil.adt"], parser=bil_adt_project_parser)
 		else:
-			toPerserve, proj = bap.run(name, args=["-dbil.adt", "--loader=raw","--raw-base={}".format(hex(config.BASE_ADDR))], parser=bil_adt_project_parser)
+			toPerserve, proj = bap.run(name, args=["-dbil.adt", "--llvm-base={}".format(hex(config.BASE_ADDR))], parser=bil_adt_project_parser)
 	else:
 		print('Loading {} ({} was already parsed)'.format(fileName, name))
 		with open(fileName,'rb') as f:

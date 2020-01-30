@@ -21,6 +21,7 @@ def get_memory():
 
 
 def find_main():
+	''' By RageKnify (Borges) '''
 	BYTES_TO_CHECK = 1024
 	e = ELF(config.BINARY_NAME)
 
