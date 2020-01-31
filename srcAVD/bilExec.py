@@ -623,15 +623,21 @@ class BilExec(bap.bil.Visitor):
 		print(arg)
 		print(dir(arg))
 		terminate()
-	def enter_While(self, arg):
-		self.TODO("While", arg)
 	def enter_In(self, arg):
 	    self.TODO('In', arg)
 	def enter_Out(self, arg):
 	    self.TODO('Out', arg)
 	def enter_Both(self, arg):
 	    self.TODO('Both', arg)
-	    
+
+	def enter_While(self, arg):
+		''' FIXME: Account for symbolic condition. Probably should modify "code" 
+			and unroll one iteration of the loop each time we execute it '''
+		while self.computeExp(arg.cond).val:
+			for statement in arg.stmts:
+				self.run(statement)
+		return True
+
 	def enter_Ite(self, arg):
 		cond = self.computeExp(arg.cond)
 		assert cond.val == 1 or cond.val == 0 or cond.isSym
