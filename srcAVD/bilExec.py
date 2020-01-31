@@ -168,9 +168,17 @@ class BilExec(bap.bil.Visitor):
 		assert cond.val == 1 or cond.val == 0 or cond.isSym
 
 		if cond.val == 1:
-			self.run(arg.true)
+			if type(arg.true) == tuple:
+				for statement in arg.true:
+					self.run(statement)
+			else:
+					self.run(arg.true)
 		elif cond.val == 0:
-			self.run(arg.false)
+			if type(arg.false) == tuple:
+				for statement in arg.false:
+					self.run(statement)
+			else:
+				self.run(arg.false)
 		else:
 			canBeTrue = self.mem.isItPossible(cond.val == True)
 			canBeFalse = self.mem.isItPossible(cond.val == False)
@@ -254,7 +262,6 @@ class BilExec(bap.bil.Visitor):
 		lhsSize = self.lastSize
 		rhs = self.computeExp(arg.rhs)
 		rhsSize = self.lastSize
-
 		negative = False
 
 		if not lhs.isSym:

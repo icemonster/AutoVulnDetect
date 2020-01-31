@@ -228,6 +228,14 @@ class APG:
 				mem.hlt = True
 				continue
 
+			if config.LOGGING:
+				with open('debugAVD.txt','a+') as f:
+					regValues = {}
+					for reg in config.ARCH.registers:
+						regValues[reg] = hex(mem.getFromMem(reg).val)
+					f.write(hex(ip)+'-')
+					f.write(str(regValues)+'\n')
+
 			code = self.program.getBlk(ip)
 			if code is None:
 				mem.hlt = True

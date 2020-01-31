@@ -17,10 +17,10 @@ parser.add_argument('--RET_ADDR', metavar='retAddr', type=str, default='0x414141
 parser.add_argument('-e', action='store_true', help='Dont generate exploits when possible')
 parser.add_argument('-s', action='store_false', help='Dont check safety policies')
 parser.add_argument('-c', action='store_true', help='Do a concrete execution')
-parser.add_argument('-v', action='store_true', help='Be very verbose')
 parser.add_argument('-nv', action='store_true', help='Dont be very verbose')
 parser.add_argument('-no-show-trace', action='store_true', help='Dont see exec. trace while executing')
 parser.add_argument('--allRam', action='store_true', help='Dont limit RAM usage')
+parser.add_argument('--debug', action='store_true', help='Be very verbose and write register values to file for debug')
 parser.add_argument('--args', nargs='*', default='', help='Arguments to be passed to the binary. Can be Symbolic by indicating: Sym<size>  eg: --args Sym4 indicates a 4 BYTE symbolic argument')
 args = parser.parse_args()
 
@@ -47,11 +47,15 @@ config.GDB_PORT = args.GDB_PORT
 config.EXEC_SAFETY_POLICIES = args.s
 config.EXEC_EXPLOITS = args.e
 config.SYM_EXEC = not args.c
-config.LOGGING = args.v
+config.LOGGING = args.debug
 config.RETADDROF = int(args.RET_ADDR, 16)
 config.BINARY_NAME = name
 config.EXEC_SAFETY_POLICIES = not args.e
 config.SAVE_EXPLOITS = args.e
+
+if config.LOGGING:
+	with open('debugAVD.txt','w') as f: #Create new logging file
+		pass
 
 elf = ELF(name) #pwntools ELF to find arch
 if elf.arch == 'i386':
