@@ -263,7 +263,7 @@ class BilExec(bap.bil.Visitor):
 		rhs = self.computeExp(arg.rhs)
 		rhsSize = self.lastSize
 		negative = False
-
+		
 		if not lhs.isSym:
 			if bitIsSet(lhs.val, lhsSize-1): #If MSB bit is set <=> number is negative
 				negative = not negative
@@ -316,6 +316,12 @@ class BilExec(bap.bil.Visitor):
 		self.lastSize = lhsSize
 		return True
 
+	def trunc_divmod(self, a, b):
+		''' Auxiliary function for C-like remainder 
+			https://stackoverflow.com/questions/34291760/how-to-easily-implement-c-like-modulo-remainder-operation-in-python-2-7
+		'''
+		return abs(a)%abs(b)*(1,-1)[a<0]
+
 	def enter_SMOD(self, arg):
 		
 		lhs = self.computeExp(arg.lhs)
@@ -335,7 +341,11 @@ class BilExec(bap.bil.Visitor):
 				rhs = rhs.twoComplement(rhsSize)
 				rhs = -rhs #Get real value from two complement negative
 
-		result = lhs % rhs
+		if not lhs.isSym and not rhs.isSym:
+			result = ADT(self.trunc_divmod(lhs.val, rhs.val))
+		else:
+			result = lhs % rhs #% operator in z3 is signed modulus already
+
 		self.result = result.twoComplement(lhsSize)
 		self.lastSize = lhsSize
 		return True

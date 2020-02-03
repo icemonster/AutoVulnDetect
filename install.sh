@@ -14,14 +14,14 @@ then
     echo "Installing on apt system"
     sudo apt install gcc-multilib gdb git libssl-dev openssl python python3 python3-pip python3-dev wget
     wget https://github.com/BinaryAnalysisPlatform/bap/releases/download/v2.0.0/{bap,libbap,libbap-dev}_2.0.0.deb
-    sudo dpkg -i {bap,libbap,libbap-dev}_1.6.0.deb
+    sudo dpkg -i {bap,libbap,libbap-dev}_2.0.0.deb
     rm *.deb
 elif [[ ${OS} = "Fedora" || ${OS} = "CentOS" || ${OS} = "RedHat" ]]
 then
     echo "Installing on RHEL system"
     sudo yum install gdb gdb-gdbserver git glibc-devel.i686 openssl openssl-devel openssl-libs python python3 python3-pip python3-devel wget
     wget https://github.com/BinaryAnalysisPlatform/bap/releases/download/v2.0.0/{bap,libbap,libbap-dev}-2.0.0-2.x86_64.rpm
-    sudo rpm -i {bap,libbap,libbap-dev}-1.6.0-2.x86_64.rpm
+    sudo rpm -i {bap,libbap,libbap-dev}-2.0.0-2.x86_64.rpm
     rm *.rpm
 else
     echo "System ${OS} not supported yet"
