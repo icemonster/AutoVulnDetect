@@ -488,9 +488,12 @@ class libcAtoi(Summary):
 		string = self.loadArgs(mem, [str])[0]
 		string = string[:-1] #Cut down last byte
 
-		val = int(string)
-
-		self.ret(mem, val)
+		if type(string) == list:
+			x = BitVec('random_int', 32)
+			self.ret(mem, x)
+		else:
+			val = int(string)
+			self.ret(mem, val)
 
 class libcIsPrint(Summary):
 	def __init__(self):
@@ -1403,6 +1406,7 @@ summaries['tolower'] = libcTolower()
 
 summaries['syscall'] = sysCalls()
 summaries['setvbuf'] = doNothing()
+summaries['setbuf'] = doNothing()
 summaries['_IO_setvbuf'] = doNothing()
 summaries['__stack_chk_fail'] = doNothing()
 summaries['__stack_chk_fail_local'] = doNothing()
