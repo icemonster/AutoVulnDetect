@@ -1,0 +1,460 @@
+
+Disassembly of section .symtab
+
+570: <__cxa_finalize>
+570:
+570: jmpq *0x200a82(%rip)
+(Jmp(Load(Var("mem",Mem(64,8)),Int(2101240,64),LittleEndian(),64)))
+
+520: <_init>
+520:
+520: subq $0x8, %rsp
+(Move(Var("v142",Imm(64)),Var("RSP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("CF",Imm(1)),LT(Var("v142",Imm(64)),Int(8,64))), Move(Var("OF",Imm(1)),HIGH(1,AND(XOR(Var("v142",Imm(64)),Int(8,64)),XOR(Var("v142",Imm(64)),Var("RSP",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("RSP",Imm(64)),Var("v142",Imm(64))),Int(8,64))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v144",Imm(64)),XOR(RSHIFT(Var("RSP",Imm(64)),Int(4,64)),Var("RSP",Imm(64))),Let(Var("v144",Imm(64)),XOR(RSHIFT(Var("v144",Imm(64)),Int(2,64)),Var("v144",Imm(64))),XOR(RSHIFT(Var("v144",Imm(64)),Int(1,64)),Var("v144",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSP",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSP",Imm(64)))))
+524: movq 0x200abd(%rip), %rax
+(Move(Var("RAX",Imm(64)),Load(Var("mem",Mem(64,8)),Int(2101224,64),LittleEndian(),64)))
+52b: testq %rax, %rax
+(Move(Var("v145",Imm(64)),Var("RAX",Imm(64))), Move(Var("OF",Imm(1)),Int(0,1)), Move(Var("CF",Imm(1)),Int(0,1)), Move(Var("AF",Imm(1)),Unknown("AF is undefined after and",Imm(1))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v146",Imm(64)),XOR(RSHIFT(Var("v145",Imm(64)),Int(4,64)),Var("v145",Imm(64))),Let(Var("v146",Imm(64)),XOR(RSHIFT(Var("v146",Imm(64)),Int(2,64)),Var("v146",Imm(64))),XOR(RSHIFT(Var("v146",Imm(64)),Int(1,64)),Var("v146",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("v145",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("v145",Imm(64)))))
+52e: je 0x2
+(If(Var("ZF",Imm(1)), (Jmp(Int(1330,64))), ()))
+530:
+530: callq *%rax
+(Move(Var("v179",Imm(64)),Var("RAX",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Int(1330,64),LittleEndian(),64)), Jmp(Var("v179",Imm(64))))
+532:
+532: addq $0x8, %rsp
+(Move(Var("v199",Imm(64)),Var("RSP",Imm(64))), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("CF",Imm(1)),LT(Var("RSP",Imm(64)),Var("v199",Imm(64)))), Move(Var("OF",Imm(1)),AND(EQ(HIGH(1,Var("v199",Imm(64))),Int(0,1)),XOR(HIGH(1,Var("v199",Imm(64))),HIGH(1,Var("RSP",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("RSP",Imm(64)),Var("v199",Imm(64))),Int(8,64))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v201",Imm(64)),XOR(RSHIFT(Var("RSP",Imm(64)),Int(4,64)),Var("RSP",Imm(64))),Let(Var("v201",Imm(64)),XOR(RSHIFT(Var("v201",Imm(64)),Int(2,64)),Var("v201",Imm(64))),XOR(RSHIFT(Var("v201",Imm(64)),Int(1,64)),Var("v201",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSP",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSP",Imm(64)))))
+536: retq
+(Move(Var("v202",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))), Jmp(Var("v202",Imm(64))))
+
+580: <_start>
+580:
+580: xorl %ebp, %ebp
+(Move(Var("RBP",Imm(64)),Int(0,64)), Move(Var("AF",Imm(1)),Unknown("AF is undefined after xor",Imm(1))), Move(Var("ZF",Imm(1)),Int(1,1)), Move(Var("PF",Imm(1)),Int(1,1)), Move(Var("OF",Imm(1)),Int(0,1)), Move(Var("CF",Imm(1)),Int(0,1)), Move(Var("SF",Imm(1)),Int(0,1)))
+582: movq %rdx, %r9
+(Move(Var("R9",Imm(64)),Var("RDX",Imm(64))))
+585: popq %rsi
+(Move(Var("RSI",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+586: movq %rsp, %rdx
+(Move(Var("RDX",Imm(64)),Var("RSP",Imm(64))))
+589: andq $-0x10, %rsp
+(Move(Var("RSP",Imm(64)),AND(Var("RSP",Imm(64)),Int(18446744073709551600,64))), Move(Var("OF",Imm(1)),Int(0,1)), Move(Var("CF",Imm(1)),Int(0,1)), Move(Var("AF",Imm(1)),Unknown("AF is undefined after and",Imm(1))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v150",Imm(64)),XOR(RSHIFT(Var("RSP",Imm(64)),Int(4,64)),Var("RSP",Imm(64))),Let(Var("v150",Imm(64)),XOR(RSHIFT(Var("v150",Imm(64)),Int(2,64)),Var("v150",Imm(64))),XOR(RSHIFT(Var("v150",Imm(64)),Int(1,64)),Var("v150",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSP",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSP",Imm(64)))))
+58d: pushq %rax
+(Move(Var("v151",Imm(64)),Var("RAX",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v151",Imm(64)),LittleEndian(),64)))
+58e: pushq %rsp
+(Move(Var("v152",Imm(64)),Var("RSP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v152",Imm(64)),LittleEndian(),64)))
+58f: leaq 0x1aa(%rip), %r8
+(Move(Var("R8",Imm(64)),Int(1856,64)))
+596: leaq 0x133(%rip), %rcx
+(Move(Var("RCX",Imm(64)),Int(1744,64)))
+59d: leaq 0xe6(%rip), %rdi
+(Move(Var("RDI",Imm(64)),Int(1674,64)))
+5a4: callq *0x200a36(%rip)
+(Move(Var("v153",Imm(64)),Load(Var("mem",Mem(64,8)),Int(2101216,64),LittleEndian(),64)), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Int(1450,64),LittleEndian(),64)), Jmp(Var("v153",Imm(64))))
+5aa:
+5aa: hlt
+()
+5ab: nopl (%rax,%rax)
+()
+
+550: <abort>
+550:
+550: jmpq *0x200a72(%rip)
+(Jmp(Load(Var("mem",Mem(64,8)),Int(2101192,64),LittleEndian(),64)))
+
+5b0: <deregister_tm_clones>
+5b0:
+5b0: leaq 0x200a61(%rip), %rdi
+(Move(Var("RDI",Imm(64)),Int(2101272,64)))
+5b7: pushq %rbp
+(Move(Var("v168",Imm(64)),Var("RBP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v168",Imm(64)),LittleEndian(),64)))
+5b8: leaq 0x200a59(%rip), %rax
+(Move(Var("RAX",Imm(64)),Int(2101272,64)))
+5bf: cmpq %rdi, %rax
+(Move(Var("v169",Imm(64)),MINUS(Var("RAX",Imm(64)),Var("RDI",Imm(64)))), Move(Var("CF",Imm(1)),LT(Var("RAX",Imm(64)),Var("RDI",Imm(64)))), Move(Var("OF",Imm(1)),HIGH(1,AND(XOR(Var("RAX",Imm(64)),Var("RDI",Imm(64))),XOR(Var("RAX",Imm(64)),Var("v169",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("v169",Imm(64)),Var("RAX",Imm(64))),Var("RDI",Imm(64)))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v170",Imm(64)),XOR(RSHIFT(Var("v169",Imm(64)),Int(4,64)),Var("v169",Imm(64))),Let(Var("v170",Imm(64)),XOR(RSHIFT(Var("v170",Imm(64)),Int(2,64)),Var("v170",Imm(64))),XOR(RSHIFT(Var("v170",Imm(64)),Int(1,64)),Var("v170",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("v169",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("v169",Imm(64)))))
+5c2: movq %rsp, %rbp
+(Move(Var("RBP",Imm(64)),Var("RSP",Imm(64))))
+5c5: je 0x19
+(If(Var("ZF",Imm(1)), (Jmp(Int(1504,64))), ()))
+5c7:
+5c7: movq 0x200a0a(%rip), %rax
+(Move(Var("RAX",Imm(64)),Load(Var("mem",Mem(64,8)),Int(2101208,64),LittleEndian(),64)))
+5ce: testq %rax, %rax
+(Move(Var("v197",Imm(64)),Var("RAX",Imm(64))), Move(Var("OF",Imm(1)),Int(0,1)), Move(Var("CF",Imm(1)),Int(0,1)), Move(Var("AF",Imm(1)),Unknown("AF is undefined after and",Imm(1))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v198",Imm(64)),XOR(RSHIFT(Var("v197",Imm(64)),Int(4,64)),Var("v197",Imm(64))),Let(Var("v198",Imm(64)),XOR(RSHIFT(Var("v198",Imm(64)),Int(2,64)),Var("v198",Imm(64))),XOR(RSHIFT(Var("v198",Imm(64)),Int(1,64)),Var("v198",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("v197",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("v197",Imm(64)))))
+5d1: je 0xd
+(If(Var("ZF",Imm(1)), (Jmp(Int(1504,64))), ()))
+5e0:
+5e0: popq %rbp
+(Move(Var("RBP",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+5e1: retq
+(Move(Var("v147",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))), Jmp(Var("v147",Imm(64))))
+5d3:
+5d3: popq %rbp
+(Move(Var("RBP",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+5d4: jmpq *%rax
+(Jmp(Var("RAX",Imm(64))))
+
+560: <exit>
+560:
+560: jmpq *0x200a6a(%rip)
+(Jmp(Load(Var("mem",Mem(64,8)),Int(2101200,64),LittleEndian(),64)))
+
+680: <frame_dummy>
+680:
+680: pushq %rbp
+(Move(Var("v181",Imm(64)),Var("RBP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v181",Imm(64)),LittleEndian(),64)))
+681: movq %rsp, %rbp
+(Move(Var("RBP",Imm(64)),Var("RSP",Imm(64))))
+684: popq %rbp
+(Move(Var("RBP",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+685: jmp -0x9a
+(Jmp(Int(1520,64)))
+5f0:
+5f0: leaq 0x200a21(%rip), %rdi
+(Move(Var("RDI",Imm(64)),Int(2101272,64)))
+5f7: leaq 0x200a1a(%rip), %rsi
+(Move(Var("RSI",Imm(64)),Int(2101272,64)))
+5fe: pushq %rbp
+(Move(Var("v184",Imm(64)),Var("RBP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v184",Imm(64)),LittleEndian(),64)))
+5ff: subq %rdi, %rsi
+(Move(Var("v185",Imm(64)),Var("RSI",Imm(64))), Move(Var("v186",Imm(64)),Var("RDI",Imm(64))), Move(Var("RSI",Imm(64)),MINUS(Var("RSI",Imm(64)),Var("RDI",Imm(64)))), Move(Var("CF",Imm(1)),LT(Var("v185",Imm(64)),Var("v186",Imm(64)))), Move(Var("OF",Imm(1)),HIGH(1,AND(XOR(Var("v185",Imm(64)),Var("v186",Imm(64))),XOR(Var("v185",Imm(64)),Var("RSI",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("RSI",Imm(64)),Var("v185",Imm(64))),Var("v186",Imm(64)))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v187",Imm(64)),XOR(RSHIFT(Var("RSI",Imm(64)),Int(4,64)),Var("RSI",Imm(64))),Let(Var("v187",Imm(64)),XOR(RSHIFT(Var("v187",Imm(64)),Int(2,64)),Var("v187",Imm(64))),XOR(RSHIFT(Var("v187",Imm(64)),Int(1,64)),Var("v187",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSI",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSI",Imm(64)))))
+602: movq %rsp, %rbp
+(Move(Var("RBP",Imm(64)),Var("RSP",Imm(64))))
+605: sarq $0x3, %rsi
+(Move(Var("tmp188",Imm(64)),Var("RSI",Imm(64))), Move(Var("RSI",Imm(64)),ARSHIFT(Var("RSI",Imm(64)),Int(3,64))), Move(Var("CF",Imm(1)),HIGH(1,LSHIFT(Var("tmp188",Imm(64)),MINUS(Int(64,64),AND(Int(3,64),MINUS(Int(64,64),Int(1,64))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSI",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSI",Imm(64)))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v189",Imm(64)),XOR(RSHIFT(Var("RSI",Imm(64)),Int(4,64)),Var("RSI",Imm(64))),Let(Var("v189",Imm(64)),XOR(RSHIFT(Var("v189",Imm(64)),Int(2,64)),Var("v189",Imm(64))),XOR(RSHIFT(Var("v189",Imm(64)),Int(1,64)),Var("v189",Imm(64)))))))), Move(Var("AF",Imm(1)),Unknown("after-shift",Imm(1))), Move(Var("OF",Imm(1)),Unknown("after-shift",Imm(1))))
+609: movq %rsi, %rax
+(Move(Var("RAX",Imm(64)),Var("RSI",Imm(64))))
+60c: shrq $0x3f, %rax
+(Move(Var("tmp190",Imm(64)),Var("RAX",Imm(64))), Move(Var("RAX",Imm(64)),RSHIFT(Var("RAX",Imm(64)),Int(63,64))), Move(Var("CF",Imm(1)),HIGH(1,LSHIFT(Var("tmp190",Imm(64)),MINUS(Int(64,64),AND(Int(63,64),MINUS(Int(64,64),Int(1,64))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RAX",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RAX",Imm(64)))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v191",Imm(64)),XOR(RSHIFT(Var("RAX",Imm(64)),Int(4,64)),Var("RAX",Imm(64))),Let(Var("v191",Imm(64)),XOR(RSHIFT(Var("v191",Imm(64)),Int(2,64)),Var("v191",Imm(64))),XOR(RSHIFT(Var("v191",Imm(64)),Int(1,64)),Var("v191",Imm(64)))))))), Move(Var("AF",Imm(1)),Unknown("after-shift",Imm(1))), Move(Var("OF",Imm(1)),Unknown("after-shift",Imm(1))))
+610: addq %rax, %rsi
+(Move(Var("v192",Imm(64)),Var("RSI",Imm(64))), Move(Var("v193",Imm(64)),Var("RAX",Imm(64))), Move(Var("RSI",Imm(64)),PLUS(Var("RSI",Imm(64)),Var("v193",Imm(64)))), Move(Var("CF",Imm(1)),LT(Var("RSI",Imm(64)),Var("v192",Imm(64)))), Move(Var("OF",Imm(1)),AND(EQ(HIGH(1,Var("v192",Imm(64))),HIGH(1,Var("v193",Imm(64)))),XOR(HIGH(1,Var("v192",Imm(64))),HIGH(1,Var("RSI",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("RSI",Imm(64)),Var("v192",Imm(64))),Var("v193",Imm(64)))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v194",Imm(64)),XOR(RSHIFT(Var("RSI",Imm(64)),Int(4,64)),Var("RSI",Imm(64))),Let(Var("v194",Imm(64)),XOR(RSHIFT(Var("v194",Imm(64)),Int(2,64)),Var("v194",Imm(64))),XOR(RSHIFT(Var("v194",Imm(64)),Int(1,64)),Var("v194",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSI",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSI",Imm(64)))))
+613: sarq %rsi
+(Move(Var("tmp195",Imm(64)),Var("RSI",Imm(64))), Move(Var("RSI",Imm(64)),ARSHIFT(Var("RSI",Imm(64)),Int(1,64))), Move(Var("CF",Imm(1)),HIGH(1,LSHIFT(Var("tmp195",Imm(64)),MINUS(Int(64,64),AND(Int(1,64),MINUS(Int(64,64),Int(1,64))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSI",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSI",Imm(64)))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v196",Imm(64)),XOR(RSHIFT(Var("RSI",Imm(64)),Int(4,64)),Var("RSI",Imm(64))),Let(Var("v196",Imm(64)),XOR(RSHIFT(Var("v196",Imm(64)),Int(2,64)),Var("v196",Imm(64))),XOR(RSHIFT(Var("v196",Imm(64)),Int(1,64)),Var("v196",Imm(64)))))))), Move(Var("AF",Imm(1)),Unknown("after-shift",Imm(1))), Move(Var("OF",Imm(1)),Int(0,1)))
+616: je 0x18
+(If(Var("ZF",Imm(1)), (Jmp(Int(1584,64))), ()))
+618:
+618: movq 0x2009d1(%rip), %rax
+(Move(Var("RAX",Imm(64)),Load(Var("mem",Mem(64,8)),Int(2101232,64),LittleEndian(),64)))
+61f: testq %rax, %rax
+(Move(Var("v203",Imm(64)),Var("RAX",Imm(64))), Move(Var("OF",Imm(1)),Int(0,1)), Move(Var("CF",Imm(1)),Int(0,1)), Move(Var("AF",Imm(1)),Unknown("AF is undefined after and",Imm(1))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v204",Imm(64)),XOR(RSHIFT(Var("v203",Imm(64)),Int(4,64)),Var("v203",Imm(64))),Let(Var("v204",Imm(64)),XOR(RSHIFT(Var("v204",Imm(64)),Int(2,64)),Var("v204",Imm(64))),XOR(RSHIFT(Var("v204",Imm(64)),Int(1,64)),Var("v204",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("v203",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("v203",Imm(64)))))
+622: je 0xc
+(If(Var("ZF",Imm(1)), (Jmp(Int(1584,64))), ()))
+630:
+630: popq %rbp
+(Move(Var("RBP",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+631: retq
+(Move(Var("v205",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))), Jmp(Var("v205",Imm(64))))
+624:
+624: popq %rbp
+(Move(Var("RBP",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+625: jmpq *%rax
+(Jmp(Var("RAX",Imm(64))))
+
+546: <sub_546>
+546:
+546: jmpq *0x200a74(%rip)
+(Jmp(Load(Var("mem",Mem(64,8)),Int(2101184,64),LittleEndian(),64)))
+
+Disassembly of section .init
+
+520: <_init>
+520:
+520: subq $0x8, %rsp
+(Move(Var("v142",Imm(64)),Var("RSP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("CF",Imm(1)),LT(Var("v142",Imm(64)),Int(8,64))), Move(Var("OF",Imm(1)),HIGH(1,AND(XOR(Var("v142",Imm(64)),Int(8,64)),XOR(Var("v142",Imm(64)),Var("RSP",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("RSP",Imm(64)),Var("v142",Imm(64))),Int(8,64))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v144",Imm(64)),XOR(RSHIFT(Var("RSP",Imm(64)),Int(4,64)),Var("RSP",Imm(64))),Let(Var("v144",Imm(64)),XOR(RSHIFT(Var("v144",Imm(64)),Int(2,64)),Var("v144",Imm(64))),XOR(RSHIFT(Var("v144",Imm(64)),Int(1,64)),Var("v144",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSP",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSP",Imm(64)))))
+524: movq 0x200abd(%rip), %rax
+(Move(Var("RAX",Imm(64)),Load(Var("mem",Mem(64,8)),Int(2101224,64),LittleEndian(),64)))
+52b: testq %rax, %rax
+(Move(Var("v145",Imm(64)),Var("RAX",Imm(64))), Move(Var("OF",Imm(1)),Int(0,1)), Move(Var("CF",Imm(1)),Int(0,1)), Move(Var("AF",Imm(1)),Unknown("AF is undefined after and",Imm(1))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v146",Imm(64)),XOR(RSHIFT(Var("v145",Imm(64)),Int(4,64)),Var("v145",Imm(64))),Let(Var("v146",Imm(64)),XOR(RSHIFT(Var("v146",Imm(64)),Int(2,64)),Var("v146",Imm(64))),XOR(RSHIFT(Var("v146",Imm(64)),Int(1,64)),Var("v146",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("v145",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("v145",Imm(64)))))
+52e: je 0x2
+(If(Var("ZF",Imm(1)), (Jmp(Int(1330,64))), ()))
+530:
+530: callq *%rax
+(Move(Var("v179",Imm(64)),Var("RAX",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Int(1330,64),LittleEndian(),64)), Jmp(Var("v179",Imm(64))))
+532:
+532: addq $0x8, %rsp
+(Move(Var("v199",Imm(64)),Var("RSP",Imm(64))), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("CF",Imm(1)),LT(Var("RSP",Imm(64)),Var("v199",Imm(64)))), Move(Var("OF",Imm(1)),AND(EQ(HIGH(1,Var("v199",Imm(64))),Int(0,1)),XOR(HIGH(1,Var("v199",Imm(64))),HIGH(1,Var("RSP",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("RSP",Imm(64)),Var("v199",Imm(64))),Int(8,64))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v201",Imm(64)),XOR(RSHIFT(Var("RSP",Imm(64)),Int(4,64)),Var("RSP",Imm(64))),Let(Var("v201",Imm(64)),XOR(RSHIFT(Var("v201",Imm(64)),Int(2,64)),Var("v201",Imm(64))),XOR(RSHIFT(Var("v201",Imm(64)),Int(1,64)),Var("v201",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSP",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSP",Imm(64)))))
+536: retq
+(Move(Var("v202",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))), Jmp(Var("v202",Imm(64))))
+
+Disassembly of section .plt
+
+550: <abort>
+550:
+550: jmpq *0x200a72(%rip)
+(Jmp(Load(Var("mem",Mem(64,8)),Int(2101192,64),LittleEndian(),64)))
+
+560: <exit>
+560:
+560: jmpq *0x200a6a(%rip)
+(Jmp(Load(Var("mem",Mem(64,8)),Int(2101200,64),LittleEndian(),64)))
+
+546: <sub_546>
+546:
+546: jmpq *0x200a74(%rip)
+(Jmp(Load(Var("mem",Mem(64,8)),Int(2101184,64),LittleEndian(),64)))
+
+Disassembly of section .plt.got
+
+570: <__cxa_finalize>
+570:
+570: jmpq *0x200a82(%rip)
+(Jmp(Load(Var("mem",Mem(64,8)),Int(2101240,64),LittleEndian(),64)))
+
+Disassembly of section .text
+
+740: <__libc_csu_fini>
+740:
+740: rep  retq
+(Move(Var("v183",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))), Jmp(Var("v183",Imm(64))))
+
+6d0: <__libc_csu_init>
+6d0:
+6d0: pushq %r15
+(Move(Var("v154",Imm(64)),Var("R15",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v154",Imm(64)),LittleEndian(),64)))
+6d2: pushq %r14
+(Move(Var("v155",Imm(64)),Var("R14",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v155",Imm(64)),LittleEndian(),64)))
+6d4: movq %rdx, %r15
+(Move(Var("R15",Imm(64)),Var("RDX",Imm(64))))
+6d7: pushq %r13
+(Move(Var("v156",Imm(64)),Var("R13",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v156",Imm(64)),LittleEndian(),64)))
+6d9: pushq %r12
+(Move(Var("v157",Imm(64)),Var("R12",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v157",Imm(64)),LittleEndian(),64)))
+6db: leaq 0x2006ce(%rip), %r12
+(Move(Var("R12",Imm(64)),Int(2100656,64)))
+6e2: pushq %rbp
+(Move(Var("v158",Imm(64)),Var("RBP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v158",Imm(64)),LittleEndian(),64)))
+6e3: leaq 0x2006ce(%rip), %rbp
+(Move(Var("RBP",Imm(64)),Int(2100664,64)))
+6ea: pushq %rbx
+(Move(Var("v159",Imm(64)),Var("RBX",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v159",Imm(64)),LittleEndian(),64)))
+6eb: movl %edi, %r13d
+(Move(Var("R13",Imm(64)),UNSIGNED(64,LOW(32,Var("RDI",Imm(64))))))
+6ee: movq %rsi, %r14
+(Move(Var("R14",Imm(64)),Var("RSI",Imm(64))))
+6f1: subq %r12, %rbp
+(Move(Var("v160",Imm(64)),Var("RBP",Imm(64))), Move(Var("v161",Imm(64)),Var("R12",Imm(64))), Move(Var("RBP",Imm(64)),MINUS(Var("RBP",Imm(64)),Var("R12",Imm(64)))), Move(Var("CF",Imm(1)),LT(Var("v160",Imm(64)),Var("v161",Imm(64)))), Move(Var("OF",Imm(1)),HIGH(1,AND(XOR(Var("v160",Imm(64)),Var("v161",Imm(64))),XOR(Var("v160",Imm(64)),Var("RBP",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("RBP",Imm(64)),Var("v160",Imm(64))),Var("v161",Imm(64)))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v162",Imm(64)),XOR(RSHIFT(Var("RBP",Imm(64)),Int(4,64)),Var("RBP",Imm(64))),Let(Var("v162",Imm(64)),XOR(RSHIFT(Var("v162",Imm(64)),Int(2,64)),Var("v162",Imm(64))),XOR(RSHIFT(Var("v162",Imm(64)),Int(1,64)),Var("v162",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RBP",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RBP",Imm(64)))))
+6f4: subq $0x8, %rsp
+(Move(Var("v163",Imm(64)),Var("RSP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("CF",Imm(1)),LT(Var("v163",Imm(64)),Int(8,64))), Move(Var("OF",Imm(1)),HIGH(1,AND(XOR(Var("v163",Imm(64)),Int(8,64)),XOR(Var("v163",Imm(64)),Var("RSP",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("RSP",Imm(64)),Var("v163",Imm(64))),Int(8,64))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v165",Imm(64)),XOR(RSHIFT(Var("RSP",Imm(64)),Int(4,64)),Var("RSP",Imm(64))),Let(Var("v165",Imm(64)),XOR(RSHIFT(Var("v165",Imm(64)),Int(2,64)),Var("v165",Imm(64))),XOR(RSHIFT(Var("v165",Imm(64)),Int(1,64)),Var("v165",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSP",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSP",Imm(64)))))
+6f8: sarq $0x3, %rbp
+(Move(Var("tmp166",Imm(64)),Var("RBP",Imm(64))), Move(Var("RBP",Imm(64)),ARSHIFT(Var("RBP",Imm(64)),Int(3,64))), Move(Var("CF",Imm(1)),HIGH(1,LSHIFT(Var("tmp166",Imm(64)),MINUS(Int(64,64),AND(Int(3,64),MINUS(Int(64,64),Int(1,64))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RBP",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RBP",Imm(64)))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v167",Imm(64)),XOR(RSHIFT(Var("RBP",Imm(64)),Int(4,64)),Var("RBP",Imm(64))),Let(Var("v167",Imm(64)),XOR(RSHIFT(Var("v167",Imm(64)),Int(2,64)),Var("v167",Imm(64))),XOR(RSHIFT(Var("v167",Imm(64)),Int(1,64)),Var("v167",Imm(64)))))))), Move(Var("AF",Imm(1)),Unknown("after-shift",Imm(1))), Move(Var("OF",Imm(1)),Unknown("after-shift",Imm(1))))
+6fc: callq -0x1e1
+(Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Int(1793,64),LittleEndian(),64)), Jmp(Int(1312,64)))
+701:
+701: testq %rbp, %rbp
+(Move(Var("v206",Imm(64)),Var("RBP",Imm(64))), Move(Var("OF",Imm(1)),Int(0,1)), Move(Var("CF",Imm(1)),Int(0,1)), Move(Var("AF",Imm(1)),Unknown("AF is undefined after and",Imm(1))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v207",Imm(64)),XOR(RSHIFT(Var("v206",Imm(64)),Int(4,64)),Var("v206",Imm(64))),Let(Var("v207",Imm(64)),XOR(RSHIFT(Var("v207",Imm(64)),Int(2,64)),Var("v207",Imm(64))),XOR(RSHIFT(Var("v207",Imm(64)),Int(1,64)),Var("v207",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("v206",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("v206",Imm(64)))))
+704: je 0x20
+(If(Var("ZF",Imm(1)), (Jmp(Int(1830,64))), ()))
+706:
+706: xorl %ebx, %ebx
+(Move(Var("RBX",Imm(64)),Int(0,64)), Move(Var("AF",Imm(1)),Unknown("AF is undefined after xor",Imm(1))), Move(Var("ZF",Imm(1)),Int(1,1)), Move(Var("PF",Imm(1)),Int(1,1)), Move(Var("OF",Imm(1)),Int(0,1)), Move(Var("CF",Imm(1)),Int(0,1)), Move(Var("SF",Imm(1)),Int(0,1)))
+708: nopl (%rax,%rax)
+()
+710:
+710: movq %r15, %rdx
+(Move(Var("RDX",Imm(64)),Var("R15",Imm(64))))
+713: movq %r14, %rsi
+(Move(Var("RSI",Imm(64)),Var("R14",Imm(64))))
+716: movl %r13d, %edi
+(Move(Var("RDI",Imm(64)),UNSIGNED(64,LOW(32,Var("R13",Imm(64))))))
+719: callq *(%r12,%rbx,8)
+(Move(Var("v182",Imm(64)),Load(Var("mem",Mem(64,8)),PLUS(Var("R12",Imm(64)),LSHIFT(Var("RBX",Imm(64)),Int(3,64))),LittleEndian(),64)), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Int(1821,64),LittleEndian(),64)), Jmp(Var("v182",Imm(64))))
+71d:
+71d: addq $0x1, %rbx
+(Move(Var("v137",Imm(64)),Var("RBX",Imm(64))), Move(Var("RBX",Imm(64)),PLUS(Var("RBX",Imm(64)),Int(1,64))), Move(Var("CF",Imm(1)),LT(Var("RBX",Imm(64)),Var("v137",Imm(64)))), Move(Var("OF",Imm(1)),AND(EQ(HIGH(1,Var("v137",Imm(64))),Int(0,1)),XOR(HIGH(1,Var("v137",Imm(64))),HIGH(1,Var("RBX",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("RBX",Imm(64)),Var("v137",Imm(64))),Int(1,64))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v139",Imm(64)),XOR(RSHIFT(Var("RBX",Imm(64)),Int(4,64)),Var("RBX",Imm(64))),Let(Var("v139",Imm(64)),XOR(RSHIFT(Var("v139",Imm(64)),Int(2,64)),Var("v139",Imm(64))),XOR(RSHIFT(Var("v139",Imm(64)),Int(1,64)),Var("v139",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RBX",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RBX",Imm(64)))))
+721: cmpq %rbx, %rbp
+(Move(Var("v140",Imm(64)),MINUS(Var("RBP",Imm(64)),Var("RBX",Imm(64)))), Move(Var("CF",Imm(1)),LT(Var("RBP",Imm(64)),Var("RBX",Imm(64)))), Move(Var("OF",Imm(1)),HIGH(1,AND(XOR(Var("RBP",Imm(64)),Var("RBX",Imm(64))),XOR(Var("RBP",Imm(64)),Var("v140",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("v140",Imm(64)),Var("RBP",Imm(64))),Var("RBX",Imm(64)))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v141",Imm(64)),XOR(RSHIFT(Var("v140",Imm(64)),Int(4,64)),Var("v140",Imm(64))),Let(Var("v141",Imm(64)),XOR(RSHIFT(Var("v141",Imm(64)),Int(2,64)),Var("v141",Imm(64))),XOR(RSHIFT(Var("v141",Imm(64)),Int(1,64)),Var("v141",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("v140",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("v140",Imm(64)))))
+724: jne -0x16
+(If(NOT(Var("ZF",Imm(1))), (Jmp(Int(1808,64))), ()))
+726:
+726: addq $0x8, %rsp
+(Move(Var("v175",Imm(64)),Var("RSP",Imm(64))), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("CF",Imm(1)),LT(Var("RSP",Imm(64)),Var("v175",Imm(64)))), Move(Var("OF",Imm(1)),AND(EQ(HIGH(1,Var("v175",Imm(64))),Int(0,1)),XOR(HIGH(1,Var("v175",Imm(64))),HIGH(1,Var("RSP",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("RSP",Imm(64)),Var("v175",Imm(64))),Int(8,64))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v177",Imm(64)),XOR(RSHIFT(Var("RSP",Imm(64)),Int(4,64)),Var("RSP",Imm(64))),Let(Var("v177",Imm(64)),XOR(RSHIFT(Var("v177",Imm(64)),Int(2,64)),Var("v177",Imm(64))),XOR(RSHIFT(Var("v177",Imm(64)),Int(1,64)),Var("v177",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSP",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSP",Imm(64)))))
+72a: popq %rbx
+(Move(Var("RBX",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+72b: popq %rbp
+(Move(Var("RBP",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+72c: popq %r12
+(Move(Var("R12",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+72e: popq %r13
+(Move(Var("R13",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+730: popq %r14
+(Move(Var("R14",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+732: popq %r15
+(Move(Var("R15",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+734: retq
+(Move(Var("v178",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))), Jmp(Var("v178",Imm(64))))
+
+580: <_start>
+580:
+580: xorl %ebp, %ebp
+(Move(Var("RBP",Imm(64)),Int(0,64)), Move(Var("AF",Imm(1)),Unknown("AF is undefined after xor",Imm(1))), Move(Var("ZF",Imm(1)),Int(1,1)), Move(Var("PF",Imm(1)),Int(1,1)), Move(Var("OF",Imm(1)),Int(0,1)), Move(Var("CF",Imm(1)),Int(0,1)), Move(Var("SF",Imm(1)),Int(0,1)))
+582: movq %rdx, %r9
+(Move(Var("R9",Imm(64)),Var("RDX",Imm(64))))
+585: popq %rsi
+(Move(Var("RSI",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+586: movq %rsp, %rdx
+(Move(Var("RDX",Imm(64)),Var("RSP",Imm(64))))
+589: andq $-0x10, %rsp
+(Move(Var("RSP",Imm(64)),AND(Var("RSP",Imm(64)),Int(18446744073709551600,64))), Move(Var("OF",Imm(1)),Int(0,1)), Move(Var("CF",Imm(1)),Int(0,1)), Move(Var("AF",Imm(1)),Unknown("AF is undefined after and",Imm(1))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v150",Imm(64)),XOR(RSHIFT(Var("RSP",Imm(64)),Int(4,64)),Var("RSP",Imm(64))),Let(Var("v150",Imm(64)),XOR(RSHIFT(Var("v150",Imm(64)),Int(2,64)),Var("v150",Imm(64))),XOR(RSHIFT(Var("v150",Imm(64)),Int(1,64)),Var("v150",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSP",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSP",Imm(64)))))
+58d: pushq %rax
+(Move(Var("v151",Imm(64)),Var("RAX",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v151",Imm(64)),LittleEndian(),64)))
+58e: pushq %rsp
+(Move(Var("v152",Imm(64)),Var("RSP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v152",Imm(64)),LittleEndian(),64)))
+58f: leaq 0x1aa(%rip), %r8
+(Move(Var("R8",Imm(64)),Int(1856,64)))
+596: leaq 0x133(%rip), %rcx
+(Move(Var("RCX",Imm(64)),Int(1744,64)))
+59d: leaq 0xe6(%rip), %rdi
+(Move(Var("RDI",Imm(64)),Int(1674,64)))
+5a4: callq *0x200a36(%rip)
+(Move(Var("v153",Imm(64)),Load(Var("mem",Mem(64,8)),Int(2101216,64),LittleEndian(),64)), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Int(1450,64),LittleEndian(),64)), Jmp(Var("v153",Imm(64))))
+5aa:
+5aa: hlt
+()
+5ab: nopl (%rax,%rax)
+()
+
+5b0: <deregister_tm_clones>
+5b0:
+5b0: leaq 0x200a61(%rip), %rdi
+(Move(Var("RDI",Imm(64)),Int(2101272,64)))
+5b7: pushq %rbp
+(Move(Var("v168",Imm(64)),Var("RBP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v168",Imm(64)),LittleEndian(),64)))
+5b8: leaq 0x200a59(%rip), %rax
+(Move(Var("RAX",Imm(64)),Int(2101272,64)))
+5bf: cmpq %rdi, %rax
+(Move(Var("v169",Imm(64)),MINUS(Var("RAX",Imm(64)),Var("RDI",Imm(64)))), Move(Var("CF",Imm(1)),LT(Var("RAX",Imm(64)),Var("RDI",Imm(64)))), Move(Var("OF",Imm(1)),HIGH(1,AND(XOR(Var("RAX",Imm(64)),Var("RDI",Imm(64))),XOR(Var("RAX",Imm(64)),Var("v169",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("v169",Imm(64)),Var("RAX",Imm(64))),Var("RDI",Imm(64)))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v170",Imm(64)),XOR(RSHIFT(Var("v169",Imm(64)),Int(4,64)),Var("v169",Imm(64))),Let(Var("v170",Imm(64)),XOR(RSHIFT(Var("v170",Imm(64)),Int(2,64)),Var("v170",Imm(64))),XOR(RSHIFT(Var("v170",Imm(64)),Int(1,64)),Var("v170",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("v169",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("v169",Imm(64)))))
+5c2: movq %rsp, %rbp
+(Move(Var("RBP",Imm(64)),Var("RSP",Imm(64))))
+5c5: je 0x19
+(If(Var("ZF",Imm(1)), (Jmp(Int(1504,64))), ()))
+5c7:
+5c7: movq 0x200a0a(%rip), %rax
+(Move(Var("RAX",Imm(64)),Load(Var("mem",Mem(64,8)),Int(2101208,64),LittleEndian(),64)))
+5ce: testq %rax, %rax
+(Move(Var("v197",Imm(64)),Var("RAX",Imm(64))), Move(Var("OF",Imm(1)),Int(0,1)), Move(Var("CF",Imm(1)),Int(0,1)), Move(Var("AF",Imm(1)),Unknown("AF is undefined after and",Imm(1))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v198",Imm(64)),XOR(RSHIFT(Var("v197",Imm(64)),Int(4,64)),Var("v197",Imm(64))),Let(Var("v198",Imm(64)),XOR(RSHIFT(Var("v198",Imm(64)),Int(2,64)),Var("v198",Imm(64))),XOR(RSHIFT(Var("v198",Imm(64)),Int(1,64)),Var("v198",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("v197",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("v197",Imm(64)))))
+5d1: je 0xd
+(If(Var("ZF",Imm(1)), (Jmp(Int(1504,64))), ()))
+5e0:
+5e0: popq %rbp
+(Move(Var("RBP",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+5e1: retq
+(Move(Var("v147",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))), Jmp(Var("v147",Imm(64))))
+5d3:
+5d3: popq %rbp
+(Move(Var("RBP",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+5d4: jmpq *%rax
+(Jmp(Var("RAX",Imm(64))))
+
+680: <frame_dummy>
+680:
+680: pushq %rbp
+(Move(Var("v181",Imm(64)),Var("RBP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v181",Imm(64)),LittleEndian(),64)))
+681: movq %rsp, %rbp
+(Move(Var("RBP",Imm(64)),Var("RSP",Imm(64))))
+684: popq %rbp
+(Move(Var("RBP",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+685: jmp -0x9a
+(Jmp(Int(1520,64)))
+5f0:
+5f0: leaq 0x200a21(%rip), %rdi
+(Move(Var("RDI",Imm(64)),Int(2101272,64)))
+5f7: leaq 0x200a1a(%rip), %rsi
+(Move(Var("RSI",Imm(64)),Int(2101272,64)))
+5fe: pushq %rbp
+(Move(Var("v184",Imm(64)),Var("RBP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v184",Imm(64)),LittleEndian(),64)))
+5ff: subq %rdi, %rsi
+(Move(Var("v185",Imm(64)),Var("RSI",Imm(64))), Move(Var("v186",Imm(64)),Var("RDI",Imm(64))), Move(Var("RSI",Imm(64)),MINUS(Var("RSI",Imm(64)),Var("RDI",Imm(64)))), Move(Var("CF",Imm(1)),LT(Var("v185",Imm(64)),Var("v186",Imm(64)))), Move(Var("OF",Imm(1)),HIGH(1,AND(XOR(Var("v185",Imm(64)),Var("v186",Imm(64))),XOR(Var("v185",Imm(64)),Var("RSI",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("RSI",Imm(64)),Var("v185",Imm(64))),Var("v186",Imm(64)))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v187",Imm(64)),XOR(RSHIFT(Var("RSI",Imm(64)),Int(4,64)),Var("RSI",Imm(64))),Let(Var("v187",Imm(64)),XOR(RSHIFT(Var("v187",Imm(64)),Int(2,64)),Var("v187",Imm(64))),XOR(RSHIFT(Var("v187",Imm(64)),Int(1,64)),Var("v187",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSI",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSI",Imm(64)))))
+602: movq %rsp, %rbp
+(Move(Var("RBP",Imm(64)),Var("RSP",Imm(64))))
+605: sarq $0x3, %rsi
+(Move(Var("tmp188",Imm(64)),Var("RSI",Imm(64))), Move(Var("RSI",Imm(64)),ARSHIFT(Var("RSI",Imm(64)),Int(3,64))), Move(Var("CF",Imm(1)),HIGH(1,LSHIFT(Var("tmp188",Imm(64)),MINUS(Int(64,64),AND(Int(3,64),MINUS(Int(64,64),Int(1,64))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSI",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSI",Imm(64)))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v189",Imm(64)),XOR(RSHIFT(Var("RSI",Imm(64)),Int(4,64)),Var("RSI",Imm(64))),Let(Var("v189",Imm(64)),XOR(RSHIFT(Var("v189",Imm(64)),Int(2,64)),Var("v189",Imm(64))),XOR(RSHIFT(Var("v189",Imm(64)),Int(1,64)),Var("v189",Imm(64)))))))), Move(Var("AF",Imm(1)),Unknown("after-shift",Imm(1))), Move(Var("OF",Imm(1)),Unknown("after-shift",Imm(1))))
+609: movq %rsi, %rax
+(Move(Var("RAX",Imm(64)),Var("RSI",Imm(64))))
+60c: shrq $0x3f, %rax
+(Move(Var("tmp190",Imm(64)),Var("RAX",Imm(64))), Move(Var("RAX",Imm(64)),RSHIFT(Var("RAX",Imm(64)),Int(63,64))), Move(Var("CF",Imm(1)),HIGH(1,LSHIFT(Var("tmp190",Imm(64)),MINUS(Int(64,64),AND(Int(63,64),MINUS(Int(64,64),Int(1,64))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RAX",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RAX",Imm(64)))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v191",Imm(64)),XOR(RSHIFT(Var("RAX",Imm(64)),Int(4,64)),Var("RAX",Imm(64))),Let(Var("v191",Imm(64)),XOR(RSHIFT(Var("v191",Imm(64)),Int(2,64)),Var("v191",Imm(64))),XOR(RSHIFT(Var("v191",Imm(64)),Int(1,64)),Var("v191",Imm(64)))))))), Move(Var("AF",Imm(1)),Unknown("after-shift",Imm(1))), Move(Var("OF",Imm(1)),Unknown("after-shift",Imm(1))))
+610: addq %rax, %rsi
+(Move(Var("v192",Imm(64)),Var("RSI",Imm(64))), Move(Var("v193",Imm(64)),Var("RAX",Imm(64))), Move(Var("RSI",Imm(64)),PLUS(Var("RSI",Imm(64)),Var("v193",Imm(64)))), Move(Var("CF",Imm(1)),LT(Var("RSI",Imm(64)),Var("v192",Imm(64)))), Move(Var("OF",Imm(1)),AND(EQ(HIGH(1,Var("v192",Imm(64))),HIGH(1,Var("v193",Imm(64)))),XOR(HIGH(1,Var("v192",Imm(64))),HIGH(1,Var("RSI",Imm(64)))))), Move(Var("AF",Imm(1)),EQ(Int(16,64),AND(Int(16,64),XOR(XOR(Var("RSI",Imm(64)),Var("v192",Imm(64))),Var("v193",Imm(64)))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v194",Imm(64)),XOR(RSHIFT(Var("RSI",Imm(64)),Int(4,64)),Var("RSI",Imm(64))),Let(Var("v194",Imm(64)),XOR(RSHIFT(Var("v194",Imm(64)),Int(2,64)),Var("v194",Imm(64))),XOR(RSHIFT(Var("v194",Imm(64)),Int(1,64)),Var("v194",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSI",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSI",Imm(64)))))
+613: sarq %rsi
+(Move(Var("tmp195",Imm(64)),Var("RSI",Imm(64))), Move(Var("RSI",Imm(64)),ARSHIFT(Var("RSI",Imm(64)),Int(1,64))), Move(Var("CF",Imm(1)),HIGH(1,LSHIFT(Var("tmp195",Imm(64)),MINUS(Int(64,64),AND(Int(1,64),MINUS(Int(64,64),Int(1,64))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("RSI",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("RSI",Imm(64)))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v196",Imm(64)),XOR(RSHIFT(Var("RSI",Imm(64)),Int(4,64)),Var("RSI",Imm(64))),Let(Var("v196",Imm(64)),XOR(RSHIFT(Var("v196",Imm(64)),Int(2,64)),Var("v196",Imm(64))),XOR(RSHIFT(Var("v196",Imm(64)),Int(1,64)),Var("v196",Imm(64)))))))), Move(Var("AF",Imm(1)),Unknown("after-shift",Imm(1))), Move(Var("OF",Imm(1)),Int(0,1)))
+616: je 0x18
+(If(Var("ZF",Imm(1)), (Jmp(Int(1584,64))), ()))
+618:
+618: movq 0x2009d1(%rip), %rax
+(Move(Var("RAX",Imm(64)),Load(Var("mem",Mem(64,8)),Int(2101232,64),LittleEndian(),64)))
+61f: testq %rax, %rax
+(Move(Var("v203",Imm(64)),Var("RAX",Imm(64))), Move(Var("OF",Imm(1)),Int(0,1)), Move(Var("CF",Imm(1)),Int(0,1)), Move(Var("AF",Imm(1)),Unknown("AF is undefined after and",Imm(1))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v204",Imm(64)),XOR(RSHIFT(Var("v203",Imm(64)),Int(4,64)),Var("v203",Imm(64))),Let(Var("v204",Imm(64)),XOR(RSHIFT(Var("v204",Imm(64)),Int(2,64)),Var("v204",Imm(64))),XOR(RSHIFT(Var("v204",Imm(64)),Int(1,64)),Var("v204",Imm(64)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("v203",Imm(64)))), Move(Var("ZF",Imm(1)),EQ(Int(0,64),Var("v203",Imm(64)))))
+622: je 0xc
+(If(Var("ZF",Imm(1)), (Jmp(Int(1584,64))), ()))
+630:
+630: popq %rbp
+(Move(Var("RBP",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+631: retq
+(Move(Var("v205",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))), Jmp(Var("v205",Imm(64))))
+624:
+624: popq %rbp
+(Move(Var("RBP",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+625: jmpq *%rax
+(Jmp(Var("RAX",Imm(64))))
+
+68a: <main>
+68a:
+68a: pushq %rbp
+(Move(Var("v171",Imm(64)),Var("RBP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v171",Imm(64)),LittleEndian(),64)))
+68b: movq %rsp, %rbp
+(Move(Var("RBP",Imm(64)),Var("RSP",Imm(64))))
+68e: movzwl 0x20097d(%rip), %edx
+(Move(Var("RDX",Imm(64)),UNSIGNED(64,UNSIGNED(32,Load(Var("mem",Mem(64,8)),PLUS(PLUS(Int(2099581,64),Int(1685,64)),Int(0,64)),LittleEndian(),16)))))
+695: movzbl 0x200974(%rip), %eax
+(Move(Var("RAX",Imm(64)),UNSIGNED(64,UNSIGNED(32,Load(Var("mem",Mem(64,8)),PLUS(PLUS(Int(2099572,64),Int(1692,64)),Int(0,64)),LittleEndian(),8)))))
+69c: movzbl %al, %eax
+(Move(Var("RAX",Imm(64)),UNSIGNED(64,UNSIGNED(32,LOW(8,LOW(32,Var("RAX",Imm(64))))))))
+69f: movswl %dx, %ecx
+(Move(Var("RCX",Imm(64)),UNSIGNED(64,SIGNED(32,LOW(16,LOW(32,Var("RDX",Imm(64))))))))
+6a2: cltd
+(Move(Var("RDX",Imm(64)),UNSIGNED(64,HIGH(32,SIGNED(64,LOW(32,Var("RAX",Imm(64))))))))
+6a3: idivl %ecx
+(If(EQ(SIGNED(64,LOW(32,Var("RCX",Imm(64)))),Int(0,64)), (CpuExn(0)), ()), Move(Var("div172",Imm(64)),SDIVIDE(Concat(LOW(32,Var("RDX",Imm(64))),LOW(32,Var("RAX",Imm(64)))),SIGNED(64,LOW(32,Var("RCX",Imm(64)))))), Move(Var("rem173",Imm(64)),SMOD(Concat(LOW(32,Var("RDX",Imm(64))),LOW(32,Var("RAX",Imm(64)))),SIGNED(64,LOW(32,Var("RCX",Imm(64)))))), If(EQ(HIGH(32,Var("div172",Imm(64))),Int(0,32)), (), (CpuExn(0))), Move(Var("v174",Imm(64)),Concat(LOW(32,Var("rem173",Imm(64))),LOW(32,Var("div172",Imm(64))))), Move(Var("RAX",Imm(64)),UNSIGNED(64,Extract(31,0,Var("v174",Imm(64))))), Move(Var("RDX",Imm(64)),UNSIGNED(64,Extract(63,32,Var("v174",Imm(64))))), Move(Var("CF",Imm(1)),Unknown("CF undefined after div",Imm(1))), Move(Var("OF",Imm(1)),Unknown("OF undefined after div",Imm(1))), Move(Var("SF",Imm(1)),Unknown("SF undefined after div",Imm(1))), Move(Var("ZF",Imm(1)),Unknown("ZF undefined after div",Imm(1))), Move(Var("AF",Imm(1)),Unknown("AF undefined after div",Imm(1))), Move(Var("PF",Imm(1)),Unknown("PF undefined after div",Imm(1))))
+6a5:
+6a5: movb %al, 0x200965(%rip)
+(Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Int(2101264,64),LOW(8,Var("RAX",Imm(64))),LittleEndian(),8)))
+6ab: movzbl 0x20095e(%rip), %eax
+(Move(Var("RAX",Imm(64)),UNSIGNED(64,UNSIGNED(32,Load(Var("mem",Mem(64,8)),PLUS(PLUS(Int(2099550,64),Int(1714,64)),Int(0,64)),LittleEndian(),8)))))
+6b2: cmpb $-0xa, %al
+(Move(Var("v148",Imm(8)),MINUS(LOW(8,LOW(32,Var("RAX",Imm(64)))),Int(246,8))), Move(Var("CF",Imm(1)),LT(LOW(8,LOW(32,Var("RAX",Imm(64)))),Int(246,8))), Move(Var("OF",Imm(1)),HIGH(1,AND(XOR(LOW(8,LOW(32,Var("RAX",Imm(64)))),Int(246,8)),XOR(LOW(8,LOW(32,Var("RAX",Imm(64)))),Var("v148",Imm(8)))))), Move(Var("AF",Imm(1)),EQ(Int(16,8),AND(Int(16,8),XOR(XOR(Var("v148",Imm(8)),LOW(8,LOW(32,Var("RAX",Imm(64))))),Int(246,8))))), Move(Var("PF",Imm(1)),NOT(LOW(1,Let(Var("v149",Imm(8)),XOR(RSHIFT(Var("v148",Imm(8)),Int(4,8)),Var("v148",Imm(8))),Let(Var("v149",Imm(8)),XOR(RSHIFT(Var("v149",Imm(8)),Int(2,8)),Var("v149",Imm(8))),XOR(RSHIFT(Var("v149",Imm(8)),Int(1,8)),Var("v149",Imm(8)))))))), Move(Var("SF",Imm(1)),HIGH(1,Var("v148",Imm(8)))), Move(Var("ZF",Imm(1)),EQ(Int(0,8),Var("v148",Imm(8)))))
+6b4: je 0x5
+(If(Var("ZF",Imm(1)), (Jmp(Int(1723,64))), ()))
+6b6:
+6b6: callq -0x16b
+(Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Int(1723,64),LittleEndian(),64)), Jmp(Int(1360,64)))
+6bb:
+6bb: movl $0x0, %edi
+(Move(Var("RDI",Imm(64)),Int(0,64)))
+6c0: callq -0x165
+(Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Int(1733,64),LittleEndian(),64)), Jmp(Int(1376,64)))
+6c5:
+6c5: nopw %cs:(%rax,%rax)
+()
+6cf: nop
+()
+
+651: <sub_651>
+651:
+651: pushq %rbp
+(Move(Var("v136",Imm(64)),Var("RBP",Imm(64))), Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Var("v136",Imm(64)),LittleEndian(),64)))
+652: movq %rsp, %rbp
+(Move(Var("RBP",Imm(64)),Var("RSP",Imm(64))))
+655: je 0xc
+(If(Var("ZF",Imm(1)), (Jmp(Int(1635,64))), ()))
+657:
+657: movq 0x2009aa(%rip), %rdi
+(Move(Var("RDI",Imm(64)),Load(Var("mem",Mem(64,8)),Int(2101256,64),LittleEndian(),64)))
+65e: callq -0xf3
+(Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Int(1635,64),LittleEndian(),64)), Jmp(Int(1392,64)))
+663:
+663: callq -0xb8
+(Move(Var("RSP",Imm(64)),MINUS(Var("RSP",Imm(64)),Int(8,64))), Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),Int(1640,64),LittleEndian(),64)), Jmp(Int(1456,64)))
+668:
+668: movb $0x1, 0x2009a5(%rip)
+(Move(Var("mem",Mem(64,8)),Store(Var("mem",Mem(64,8)),Int(2101268,64),Int(1,8),LittleEndian(),8)))
+66f: popq %rbp
+(Move(Var("RBP",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))))
+670: retq
+(Move(Var("v180",Imm(64)),Load(Var("mem",Mem(64,8)),Var("RSP",Imm(64)),LittleEndian(),64)), Move(Var("RSP",Imm(64)),PLUS(Var("RSP",Imm(64)),Int(8,64))), Jmp(Var("v180",Imm(64))))
