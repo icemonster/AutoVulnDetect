@@ -31,8 +31,23 @@ def find_main():
 
 	hlt_inst_index = lines.index(hlt_inst)
 
-	main_inst = lines[hlt_inst_index-2]
-	
+	arch = e.get_machine_arch()
+	if arch == 'amd64':
+		# 64 bit ELF
+		main_inst = lines[hlt_inst_index-2]
+
+	elif arch == 'i386':
+		# 32 bit ELF
+		if e.statically_linked:
+			main_inst = lines[hlt_inst_index-3]
+
+		else:
+			assert False, "Unimplemented, stripped i386 dynamically linked ELF"
+
+	else:
+		# Unsupported arch
+		assert False, "Unsupported architecture"
+
 	main_text = main_inst[main_inst.rfind('x')-1:]
 	main_addr = int(main_text, 16)
 	return main_addr
