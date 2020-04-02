@@ -148,7 +148,7 @@ class Program:
 		if '+' in func:
 			func,offset = func.split('+')
 		else:
-			print('TODO - what to do with positive offset???')
+			print('[program.py:getCode TODO - what to do with positive offset???')
 			exit()
 
 
