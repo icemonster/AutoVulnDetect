@@ -51,9 +51,12 @@ class Program:
 
 		#result: '__libc_start_main+0x0 in libc.so.6 (0x18d90)'
 		func = self.concrete.ld.describe_addr(ip).split(' ')[0] 
-		assert '+' in func
-		func,offset = func.split('+')
-
+		
+		if '+' in func:
+			func,offset = func.split('+')
+		elif '-' in func:
+			func,offset = func.split('-')
+			
 		func2 = func
 		if func2.startswith('PLT.'):
 			func2 = func2[4:]

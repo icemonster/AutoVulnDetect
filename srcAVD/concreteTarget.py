@@ -70,17 +70,17 @@ class AvatarGDBConcreteTarget():
         entry = self.target.protocols.memory.get_symbol('main')
         if not entry[0]:
             config.STRIPPED_BINARY = True
-            if config.ARCH == config.x86:
-                print('Can not handle 32-bit stripped binaries yet.')
-                exit()
+            #if config.ARCH == config.x86:
+            #    print('Can not handle 32-bit stripped binaries yet.')
+            #    exit()
+            #else:
+            #Find main another way
+            if config.IS_PIE:
+                entry = config.BASE_ADDR + find_main()
             else:
-                #Find main another way
-                if config.IS_PIE:
-                    entry = config.BASE_ADDR + find_main()
-                else:
-                    entry = find_main()
-                    
-                print('Binary is stripped. base = {}, main = {}'.format(hex(config.BASE_ADDR), hex(entry)))
+                entry = find_main()
+                
+            print('Binary is stripped. base = {}, main = {}'.format(hex(config.BASE_ADDR), hex(entry)))
         else:
             entry = entry[1]
 
@@ -384,6 +384,11 @@ class AvatarGDBConcreteTarget():
     def read_tls(self, cur_ip, addr, size):
         #tls = self.ld.find_object_containing(cur_ip)
         tls = self.ld.find_object('libc.so') #FIXME this doesnt make sense... but works... why?
+
+        if tls is None: #Maybe its a stripped binary
+            print('TLS - Invalid Access')
+            return '\x00'*(size//8)
+
         res = tls.memory.load(tls.tls_data_start+addr, size//8)
         return res
         #print('TLSACCESS - {} = {}'.format(addr, res))

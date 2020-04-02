@@ -13,9 +13,9 @@ if [[ ${OS} = "\"Ubuntu\"" || ${OS} = "Debian" ]]
 then
     echo "Installing on apt system"
     sudo apt install gcc-multilib gdb git libssl-dev openssl python python3 python3-pip python3-dev wget
-    wget https://github.com/BinaryAnalysisPlatform/bap/releases/download/v2.0.0/{bap,libbap,libbap-dev}_2.0.0.deb
-    sudo dpkg -i {bap,libbap,libbap-dev}_2.0.0.deb
-    rm *.deb
+    #wget https://github.com/BinaryAnalysisPlatform/bap/releases/download/v2.0.0/{bap,libbap,libbap-dev}_2.0.0.deb
+    #sudo dpkg -i {bap,libbap,libbap-dev}_2.0.0.deb
+    #rm *.deb
 elif [[ ${OS} = "Fedora" || ${OS} = "CentOS" || ${OS} = "RedHat" ]]
 then
     echo "Installing on RHEL system"
@@ -30,6 +30,6 @@ fi
 
 CC=gcc pip3 install posix-ipc --user
 pip3 install --no-binary keystone-engine keystone-engine --user
-pip3 install --upgrade git+https://github.com/arthaud/python3-pwntools.git --user
+pip3 install --upgrade git+https://github.com/Gallopsled/pwntools --user
 pip3 install avatar2 bap cle z3-solver --user
 #pip3 install --upgrade git+https://github.com/angr/cle.git --user
