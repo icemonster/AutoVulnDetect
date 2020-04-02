@@ -6,7 +6,7 @@ import resource, os
 from pwn import *
 
 def memory_limit():
-	''' Limit RAM usage ''' 
+	''' Limit RAM usage '''
 	soft, hard = resource.getrlimit(resource.RLIMIT_AS)
 	resource.setrlimit(resource.RLIMIT_AS, (get_memory() * 1024 * 9 / 10, hard))
 
@@ -31,8 +31,23 @@ def find_main():
 
 	hlt_inst_index = lines.index(hlt_inst)
 
-	main_inst = lines[hlt_inst_index-2]
-	
+	arch = e.get_machine_arch()
+	if arch == 'amd64':
+		# 64 bit ELF
+		main_inst = lines[hlt_inst_index-2]
+
+	elif arch == 'i386':
+		# 32 bit ELF
+		if e.statically_linked:
+			main_inst = lines[hlt_inst_index-3]
+
+		else:
+			assert False, "Unimplemented, stripped i386 dynamically linked ELF"
+
+	else:
+		# Unsupported arch
+		assert False, "Unsupported architecture"
+
 	main_text = main_inst[main_inst.rfind('x')-1:]
 	main_addr = int(main_text, 16)
 	return main_addr
@@ -45,7 +60,7 @@ class MemRange:
 		self.start = start
 		self.end = end
 
-def twoComplement(n, size=32): 
+def twoComplement(n, size=32):
 	#if n is negative, this will actually be the 2complement :)
 	#size = nr of bits of n
 	return n & calcMod(size)
@@ -67,7 +82,7 @@ def getString(mem, addr):
 		if val.isSym:
 			if not mem.isItPossible(val.val != 0):
 				res.append('\x00')
-				return res 
+				return res
 
 			res.append(val.val)
 		else:
@@ -81,7 +96,7 @@ def getString(mem, addr):
 		return res
 
 def getPossibleValue(mem, s):
-	solver = mem.gm.solver 
+	solver = mem.gm.solver
 	assert solver.check() == sat
 
 	m = solver.model()
@@ -104,12 +119,12 @@ def singleValue(mem, s):
 	''' Check is symbolic value s can only have 1 concrete value and return it.
 			Return None otherwise '''
 
-	solver = mem.gm.solver 
+	solver = mem.gm.solver
 	val = getPossibleValue(mem, s)
 
 	if not mem.isItPossible(s != val):
 		mem.addRestr(s == val)
-		return val 
+		return val
 
 	return None
 
@@ -122,7 +137,7 @@ def parseFormatString(mem, addr, s):
 	res = []
 	while i < size:
 		if s[i] == '%':
-			
+
 			if s[i+1] == 's':
 				arg = mem.load(addr).val
 
@@ -167,7 +182,7 @@ def parseFormatString(mem, addr, s):
 					#print(arg, end='')
 					res += list(str(arg))
 					numWritten += len(str(arg))
-				
+
 			elif s[i+1] == 'x':
 				arg = mem.load(addr, size=32).val
 				#print(hex(arg)[2:], end='')
@@ -181,7 +196,7 @@ def parseFormatString(mem, addr, s):
 
 				if s[i+2] == 'l' and s[i+3] == 'd':
 					arg2 = mem.load(addr).val
-					
+
 					arg = arg2*pow(2,32)+arg
 					if arg & pow(2, 63): #If MSB is set, its a negative number
 						arg = -twoComplement(-arg)
@@ -215,7 +230,7 @@ def parseFormatString(mem, addr, s):
 			#print(s[i], end='')
 			res += list(s[i])
 		i += 1
-		
+
 	return numWritten, res
 
 def isSymbolic(val):
@@ -235,7 +250,7 @@ def getStringRepresentation(s, bts=True, beautify=False):
 		l = l.zfill(2)
 
 		if bts:
-			l2 = i 
+			l2 = i
 		else:
 			l2 = ord(i)
 
@@ -274,7 +289,7 @@ def all_concrete_inputs(mem, minimized):
 		string = ''
 		values = {}
 
-		
+
 		for v in m:
 			name = v.name()
 			if name.startswith('inp_'):
@@ -297,7 +312,7 @@ def all_concrete_inputs(mem, minimized):
 	return answers
 
 def concrete_input(mem, minimized=True):
-	''' 
+	'''
 		Creates optimizer to give preference for inputs with "A"s
 	'''
 
@@ -315,7 +330,7 @@ def concrete_input(mem, minimized=True):
 	for v in symVars:
 		o.add_soft(v == 0x41)
 
-	assert o.check() == sat 
+	assert o.check() == sat
 
 	m = o.model()
 
@@ -356,7 +371,7 @@ def concrete_input(mem, minimized=True):
 
 	if minimized:
 		string2 = string.rstrip('A') #Minimize input. FIXME - The A's in the end might be important...
-		
+
 		if string != string2:
 			print('Try this if the string below doesnt work:',getStringRepresentation(string, bts=False))
 
@@ -449,19 +464,19 @@ def isMetadata(gm, addr):
 	return True
 
 def addSoftExtreme(mem, bv, maximize=True):
-	s = mem.gm.solver 
+	s = mem.gm.solver
 
 	#Prioritize input to use 'A's
 	o = Optimize()
 	for ass in s.assertions():
 		o.add(ass)
-	
+
 	if maximize:
 		o.maximize(bv)
 	else:
 		o.minimize(bv)
 
-	assert o.check() == sat 
+	assert o.check() == sat
 
 	m = o.model()
 	val = m.evaluate(bv).as_long()
